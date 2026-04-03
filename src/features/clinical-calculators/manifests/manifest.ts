@@ -1,0 +1,152 @@
+import type { CalculatorManifest } from "@/features/clinical-calculators/types";
+
+const yesNoOptions = [
+  { label: "Selecione...", value: "" },
+  { label: "Sim", value: "yes" },
+  { label: "Não", value: "no" },
+];
+
+export const news2Manifest: CalculatorManifest = {
+  slug: "news2",
+  title: "NEWS2",
+  shortTitle: "NEWS2",
+  description: "Detecção precoce de deterioração clínica.",
+  seoTitle: "NEWS2 | Dosefy",
+  seoDescription: "Calcule o NEWS2 com a tabela oficial completa, incluindo escala de oxigenação 1 e 2.",
+  heroEyebrow: "Monitorização de deterioração clínica",
+  heroDescription:
+    "Calculadora completa do NEWS2 com pontuação por parâmetro, suporte a escala de oxigenação 1 e 2 e interpretação por nível de alerta.",
+  heroHighlights: [
+    "Aplica a tabela oficial sem simplificar ranges.",
+    "Mostra a pontuação individual de cada parâmetro.",
+    "Inclui a escala 2 para pacientes selecionados com alvo de saturação diferente.",
+  ],
+  resultMetricLabel: "NEWS2",
+  actionLabel: "Calcular NEWS2",
+  note: "Ferramenta de apoio à decisão. Não substitui julgamento clínico. Use a tabela oficial NEWS2 sem simplificações.",
+  limitations: [
+    "A escolha entre escala 1 e 2 depende do contexto clínico e da política institucional.",
+    "NEWS2 não substitui avaliação médica, gasometria, lactato ou investigação etiológica.",
+    "Deterioração clínica pode ocorrer mesmo com score ainda moderado se a tendência estiver piorando.",
+  ],
+  references: [
+    {
+      label: "Royal College of Physicians: NEWS2",
+      href: "https://www.rcp.ac.uk/improving-care/resources/national-early-warning-score-news-2/",
+    },
+    {
+      label: "Evaluation of NEWS2 in predicting early deterioration",
+      href: "https://pubmed.ncbi.nlm.nih.gov/30165399/",
+    },
+  ],
+  sections: [
+    {
+      id: "news2",
+      title: "Parâmetros do NEWS2",
+      description: "Preencha cada domínio exatamente conforme os sinais vitais e o estado clínico atuais.",
+    },
+  ],
+  fields: [
+    {
+      name: "respiratoryRate",
+      label: "Frequência respiratória",
+      type: "number",
+      sectionId: "news2",
+      inputMode: "numeric",
+      placeholder: "Ex.: 24",
+      min: 0,
+      max: 80,
+      suffix: "irpm",
+    },
+    {
+      name: "oxygenScale",
+      label: "Escala de oxigenação",
+      type: "select",
+      sectionId: "news2",
+      options: [
+        { label: "Selecione...", value: "" },
+        { label: "Escala 1", value: "1" },
+        { label: "Escala 2", value: "2" },
+      ],
+      description: "Escala 2 deve ser reservada ao contexto apropriado de alvo de saturação diferente.",
+    },
+    {
+      name: "oxygenSaturation",
+      label: "Saturação O2",
+      type: "number",
+      sectionId: "news2",
+      inputMode: "numeric",
+      placeholder: "Ex.: 93",
+      min: 30,
+      max: 100,
+      suffix: "%",
+    },
+    {
+      name: "supplementalOxygen",
+      label: "Uso de O2 suplementar",
+      type: "select",
+      sectionId: "news2",
+      options: yesNoOptions,
+    },
+    {
+      name: "systolicBloodPressure",
+      label: "Pressão sistólica",
+      type: "number",
+      sectionId: "news2",
+      inputMode: "numeric",
+      placeholder: "Ex.: 102",
+      min: 30,
+      max: 300,
+      suffix: "mmHg",
+    },
+    {
+      name: "heartRate",
+      label: "Frequência cardíaca",
+      type: "number",
+      sectionId: "news2",
+      inputMode: "numeric",
+      placeholder: "Ex.: 118",
+      min: 20,
+      max: 250,
+      suffix: "bpm",
+    },
+    {
+      name: "temperature",
+      label: "Temperatura",
+      type: "number",
+      sectionId: "news2",
+      inputMode: "decimal",
+      placeholder: "Ex.: 38.4",
+      min: 25,
+      max: 45,
+      step: 0.1,
+      suffix: "°C",
+    },
+    {
+      name: "consciousness",
+      label: "Nível de consciência",
+      type: "select",
+      sectionId: "news2",
+      options: [
+        { label: "Selecione...", value: "" },
+        { label: "Alerta", value: "alert" },
+        { label: "Nova confusão", value: "new-confusion" },
+        { label: "Responde à voz", value: "voice" },
+        { label: "Responde à dor", value: "pain" },
+        { label: "Não responsivo", value: "unresponsive" },
+      ],
+    },
+  ],
+  initialValues: {
+    respiratoryRate: "",
+    oxygenScale: "",
+    oxygenSaturation: "",
+    supplementalOxygen: "",
+    systolicBloodPressure: "",
+    heartRate: "",
+    temperature: "",
+    consciousness: "",
+  },
+};
+
+export const calculatorManifest = news2Manifest;
